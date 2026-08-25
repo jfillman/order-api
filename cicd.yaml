@@ -8,6 +8,9 @@ build:
                               # build.script
   unitTest:
     enabled: false
+  cache:
+    enabled: true
+    size: small
 
 ephemeralEnvironments:
   pullRequest:
