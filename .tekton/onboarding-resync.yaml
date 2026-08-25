@@ -17,7 +17,7 @@
 # never enough to keep this push-only.
 #
 # app-order-api-cicd, order-api, app, jfillman, and (if a release stage is
-# declared)  are filled in by deliver-onboarding-files.yaml's own
+# declared) https://github.com/jfillman/gitops-order-api are filled in by deliver-onboarding-files.yaml's own
 # substitution loop when it delivers this file.
 apiVersion: tekton.dev/v1
 kind: PipelineRun
@@ -41,7 +41,7 @@ spec:
     - { name: app-name, value: "order-api" }
     - { name: app-type, value: "app" }
     - { name: github-owner, value: "jfillman" }
-    - { name: gitops-repo-url, value: "" }
+    - { name: gitops-repo-url, value: "https://github.com/jfillman/gitops-order-api" }
   taskRunTemplate:
     serviceAccountName: pipeline-runner
   timeouts:
