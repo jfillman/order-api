@@ -18,3 +18,5 @@ pipelines:
       branch: main
     steps:
       - stage: build
+      - stage: deploy
+        env: dev
