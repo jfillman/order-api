@@ -1,0 +1,18 @@
+# Self-service lower-env declaration (idp/docs/gitops-strategy.md §10) - read live by
+# this repo's own order-api-lower-envs ApplicationSet to provision this env's
+# namespace via idp-service-catalog's idp-application chart.
+#
+# envName, not env - idp-application's own `env:` key is reserved for the container
+# env-var list (see checkout-api's own platform/envs/dev.yaml for the live Helm error
+# this avoids).
+#
+# rollout: null - bootstrap stub, no image published yet (the CI pipeline that would
+# build one is exactly what this file unblocks). Just the baseline
+# namespace/ServiceAccount/NetworkPolicy until a real pipeline run patches in
+# rollout.image.
+envName: dev
+# ghcr.io packages default to private on first push - same real 401 checkout-api hit
+# pulling its own scaffolded image; enabling this up front avoids repeating it.
+registryCredentials:
+  enabled: true
+rollout: null
