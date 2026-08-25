@@ -15,4 +15,7 @@ envName: dev
 # pulling its own scaffolded image; enabling this up front avoids repeating it.
 registryCredentials:
   enabled: true
-rollout: null
+rollout:
+  image:
+    repository: ghcr.io/jfillman/order-api
+    tag: 0.1.1-8041fe9
