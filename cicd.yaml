@@ -6,6 +6,8 @@ build:
   dockerfile: ./Dockerfile   # whole build lives in the scaffolded multi-stage
                               # Dockerfile (mvn package -> JRE runtime stage) - no
                               # build.script
+  unitTest:
+    enabled: false
 
 ephemeralEnvironments:
   pullRequest:
