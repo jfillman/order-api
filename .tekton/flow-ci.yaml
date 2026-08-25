@@ -1,0 +1,42 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: ci-
+  labels:
+    platform.io/flow: "ci"
+    platform.io/stage: "build"
+    platform.io/step-index: "0"
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[push]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/on-cel-expression: '!("platform/envs/**".pathChanged()) && has(body.ref) && body.ref == "refs/heads/main"'
+    pipelinesascode.tekton.dev/max-keep-runs: "5"
+spec:
+  pipelineRef:
+    resolver: cluster
+    params:
+      - { name: kind, value: pipeline }
+      - { name: name, value: build }
+      - { name: namespace, value: platform-catalog }
+  params:
+    - { name: git-url, value: "{{ repo_url }}" }
+    - { name: git-revision, value: "{{ revision }}" }
+    - { name: image-repo, value: "ghcr.io/jfillman/order-api" }
+    - { name: pr-tag-only, value: "false" }
+    - { name: app-namespace, value: "app-order-api-cicd" }
+    - { name: app-name, value: "order-api" }
+    - { name: app-type, value: "app" }
+    - { name: is-flow-terminal, value: "false" }
+
+  workspaces:
+    - name: source
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+  taskRunTemplate:
+    serviceAccountName: pipeline-runner
+  timeouts:
+    pipeline: "1h"

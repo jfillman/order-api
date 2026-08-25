@@ -1,0 +1,42 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  generateName: pr-build-
+  labels:
+    platform.io/flow: "pr-build"
+    platform.io/stage: "build"
+    platform.io/step-index: "0"
+  annotations:
+    pipelinesascode.tekton.dev/on-event: "[pull_request]"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/on-cel-expression: 'has(body.pull_request) && body.action != "opened" && body.pull_request.labels.exists(l, l.name == "preview") && body.pull_request.base.ref == "main"'
+    pipelinesascode.tekton.dev/max-keep-runs: "5"
+spec:
+  pipelineRef:
+    resolver: cluster
+    params:
+      - { name: kind, value: pipeline }
+      - { name: name, value: build }
+      - { name: namespace, value: platform-catalog }
+  params:
+    - { name: git-url, value: "{{ repo_url }}" }
+    - { name: git-revision, value: "{{ revision }}" }
+    - { name: image-repo, value: "ghcr.io/jfillman/order-api-pr" }
+    - { name: pr-tag-only, value: "true" }
+    - { name: app-namespace, value: "app-order-api-cicd" }
+    - { name: app-name, value: "order-api" }
+    - { name: app-type, value: "app" }
+    - { name: is-flow-terminal, value: "true" }
+
+  workspaces:
+    - name: source
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+  taskRunTemplate:
+    serviceAccountName: pipeline-runner
+  timeouts:
+    pipeline: "1h"
