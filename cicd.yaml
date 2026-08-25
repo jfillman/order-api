@@ -8,7 +8,7 @@ build:
                               # build.script
 
 deploy:
-  lowerEnvironments: [dev]
+  lowerEnvironments: []
 
 pipelines:
   ci:
@@ -18,5 +18,3 @@ pipelines:
       branch: main
     steps:
       - stage: build
-      - stage: deploy
-        env: dev
