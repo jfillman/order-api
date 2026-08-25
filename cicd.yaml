@@ -7,6 +7,28 @@ build:
                               # Dockerfile (mvn package -> JRE runtime stage) - no
                               # build.script
 
+ephemeralEnvironments:
+  pullRequest:
+    enabled: true
+  ttl: 5d
+
+governance:
+  sast: false
+  imageScan: false
+  policyCheck: false
+  sbom: false
+  allowedCommitSigners:
+    - crossfader@gmail.com
+    - 7268337+jfillman@users.noreply.github.com
+
+secrets:
+  - name: slack-webhook-url
+
+notifications:
+  slack:
+    enabled: true
+    channel: "#all-idp-lab"
+
 deploy:
   lowerEnvironments: [dev]
 
