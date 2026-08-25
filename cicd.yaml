@@ -33,6 +33,8 @@ notifications:
 
 deploy:
   lowerEnvironments: [dev]
+  upperEnvironments:
+    - { name: prod, cluster: kind-prod }
 
 pipelines:
   ci:
@@ -44,3 +46,5 @@ pipelines:
       - stage: build
       - stage: deploy
         env: dev
+      - stage: release
+        env: prod
