@@ -1,0 +1,37 @@
+# platform/pr-env.yaml
+#
+# Shared template for every PR-based ephemeral environment (platform-cicd's pr-envs
+# ApplicationSet, ephemeral-envs.yaml) - same idp-service-catalog idp-application chart
+# and directory convention as platform/envs/dev.yaml's lower-env tier, just one static
+# file reused for every PR rather than one file per env (a PR number isn't a fixed
+# filename). Deliberately NOT platform/envs/pr.yaml - lower-envs-applicationset.yaml's
+# own generator already watches platform/envs/*.yaml for the dev-tier lower env, and a
+# file there would collide with it.
+#
+# Was missing entirely - ephemeralEnvironments.pullRequest.enabled: true in this repo's
+# own cicd.yaml made ArgoCD's pullRequest generator spawn order-api-pr-1 expecting this
+# file at $appsrc/platform/pr-env.yaml; render failed outright (ComparisonError: no
+# such file or directory) since the app was opted into PR envs before this onboarding
+# step was done.
+#
+# envName and rollout.image are NOT set here - the ApplicationSet template stamps both
+# per-PR via its own valuesObject, which wins over this valueFiles-sourced content
+# (same precedence platform/envs/dev.yaml's own comment documents relying on). Setting
+# either here would be silently overridden, not an error.
+#
+# port 8080 / path "/" - matches this app's already-live dev Rollout (app-order-api-dev),
+# not a Spring Boot Actuator guess: order-api doesn't have actuator wired in yet, so dev
+# probes the root path same as this does.
+#
+# Read from this PR's own branch (not main), so editing this file inside a PR
+# customizes that PR's own preview environment - anything below is yours to change.
+rollout:
+  ports:
+    - name: http
+      containerPort: 8080
+  readinessProbe:
+    httpGet: { path: /, port: http }
+    initialDelaySeconds: 3
+  livenessProbe:
+    httpGet: { path: /, port: http }
+    initialDelaySeconds: 3
