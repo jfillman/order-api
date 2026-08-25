@@ -8,7 +8,7 @@ build:
                               # build.script
 
 deploy:
-  lowerEnvironments: []
+  lowerEnvironments: [dev]
 
 pipelines:
   ci:
