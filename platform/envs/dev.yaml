@@ -18,7 +18,11 @@ registryCredentials:
 rollout:
   image:
     repository: ghcr.io/jfillman/order-api
+<<<<<<< HEAD
     tag: latest
   ports:
     - name: http
       containerPort: 8080
+=======
+    tag: 0.1.1-8041fe9
+>>>>>>> 53ce7df30c5b79ff4191d85b618f175a2e2769a5

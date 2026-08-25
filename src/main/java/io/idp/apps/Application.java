@@ -15,6 +15,10 @@ public class Application {
 
     @GetMapping("/")
     public String home() {
+<<<<<<< HEAD
         return "order-api: Hello World!";
+=======
+        return "order-api: Hello!";
+>>>>>>> 53ce7df30c5b79ff4191d85b618f175a2e2769a5
     }
 }
