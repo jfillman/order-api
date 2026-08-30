@@ -9,7 +9,7 @@ metadata:
   annotations:
     pipelinesascode.tekton.dev/on-event: "[push]"
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
-    pipelinesascode.tekton.dev/on-cel-expression: '!("platform/envs/**".pathChanged()) && has(body.ref) && body.ref == "refs/heads/main"'
+    pipelinesascode.tekton.dev/on-cel-expression: '(!has(body.head_commit) || body.head_commit.author.email != "deploy@platform-cicd.invalid") && has(body.ref) && body.ref == "refs/heads/main"'
     pipelinesascode.tekton.dev/max-keep-runs: "5"
 spec:
   pipelineRef:
