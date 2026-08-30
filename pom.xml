@@ -13,7 +13,7 @@
 
   <groupId>io.idp.apps</groupId>
   <artifactId>order-api</artifactId>
-  <version>0.1.12</version>
+  <version>0.1.13</version>
   <packaging>jar</packaging>
 
   <properties>
