@@ -18,4 +18,4 @@ registryCredentials:
 rollout:
   image:
     repository: ghcr.io/jfillman/order-api
-    tag: 0.1.5-1379f48
+    tag: 0.1.5-a09bd50
