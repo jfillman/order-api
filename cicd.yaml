@@ -18,10 +18,10 @@ ephemeralEnvironments:
   ttl: 5d
 
 governance:
-  sast: false
-  imageScan: false
-  policyCheck: false
-  sbom: false
+  sast: true
+  imageScan: true
+  policyCheck: true
+  sbom: true
   allowedCommitSigners:
     - crossfader@gmail.com
     - 7268337+jfillman@users.noreply.github.com
@@ -48,6 +48,8 @@ pipelines:
     steps:
       - stage: build
       - stage: deploy
+        env: dev
+      - stage: test
         env: dev
       - stage: release
         env: prod
