@@ -51,6 +51,7 @@ pipelines:
         env: dev
       - stage: test
         env: dev
+        testName: integration
       - stage: release
         env: prod
 # onboarding-resync-trigger: 2026-08-30T05:44:01Z
