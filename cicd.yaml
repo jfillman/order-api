@@ -38,6 +38,9 @@ deploy:
   lowerEnvironments: [dev]
   upperEnvironments:
     - { name: prod, cluster: kind-prod }
+  promotionOrder:
+    - dev
+    - prod
 
 pipelines:
   ci:
