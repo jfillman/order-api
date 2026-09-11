@@ -9,5 +9,6 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 RUN apk upgrade --no-cache
 COPY --from=build /app/target/*.jar app.jar
+RUN apk upgrade --no-cache
 EXPOSE 8080
 CMD ["java", "-jar", "app.jar"]
