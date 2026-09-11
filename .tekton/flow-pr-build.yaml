@@ -3,10 +3,10 @@ kind: PipelineRun
 metadata:
   generateName: pr-build-0-build-
   labels:
-    platform.io/app: "order-api"
-    platform.io/flow: "pr-build"
-    platform.io/stage: "build"
-    platform.io/step-index: "0"
+    hangar.io/app: "order-api"
+    hangar.io/flow: "pr-build"
+    hangar.io/stage: "build"
+    hangar.io/step-index: "0"
   annotations:
     pipelinesascode.tekton.dev/on-event: "[pull_request]"
     pipelinesascode.tekton.dev/on-target-branch: "[main]"
@@ -39,5 +39,13 @@ spec:
               storage: 2Gi
   taskRunTemplate:
     serviceAccountName: pipeline-runner
+
+  taskRunSpecs:
+    - pipelineTaskName: notify-backstage
+      podTemplate:
+        hostAliases:
+          - ip: 192.168.64.6
+            hostnames:
+              - backstage.prod.kiac.local
   timeouts:
     pipeline: "1h"
