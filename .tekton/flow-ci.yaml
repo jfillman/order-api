@@ -1,8 +1,9 @@
 apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
-  generateName: ci-
+  generateName: ci-0-build-
   labels:
+    platform.io/app: "order-api"
     platform.io/flow: "ci"
     platform.io/stage: "build"
     platform.io/step-index: "0"
