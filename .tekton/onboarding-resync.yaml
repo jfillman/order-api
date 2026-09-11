@@ -4,7 +4,7 @@
 # `"cicd.yaml".pathChanged()` CEL extension. This is what keeps this Application's own
 # onboarding boilerplate in sync when the platform's templates change too - one re-sync
 # path handles both cases. Templates live at
-# charts/platform-cicd-app/files/onboarding-templates/, delivered via a ConfigMap (not
+# charts/glidepath-app/files/onboarding-templates/, delivered via a ConfigMap (not
 # baked into the toolbox image), so an edit takes effect on this app's next `helm upgrade`.
 #
 # has(body.ref) && body.ref == "refs/heads/main" (2026-08-24, found live: onboarding-
