@@ -33,6 +33,8 @@ notifications:
   slack:
     enabled: true
     channel: "#all-idp-lab"
+  backstage:
+    enabled: true
 
 deploy:
   lowerEnvironments: [dev]
