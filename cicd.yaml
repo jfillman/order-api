@@ -37,11 +37,12 @@ notifications:
     enabled: true
 
 deploy:
-  lowerEnvironments: [dev]
+  lowerEnvironments: [dev, test]
   upperEnvironments:
     - { name: prod, cluster: kind-prod }
   promotionOrder:
     - dev
+    - test
     - prod
 
 pipelines:

@@ -31,7 +31,11 @@ rollout:
       containerPort: 8080
   readinessProbe:
     httpGet: { path: /, port: http }
-    initialDelaySeconds: 3
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
   livenessProbe:
     httpGet: { path: /, port: http }
-    initialDelaySeconds: 3
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
