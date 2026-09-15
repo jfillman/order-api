@@ -27,7 +27,7 @@ spec:
     - { name: app-namespace, value: "app-order-api-cicd" }
     - { name: app-name, value: "order-api" }
     - { name: app-type, value: "app" }
-    - { name: is-flow-terminal, value: "false" }
+    - { name: is-flow-terminal, value: "true" }
 
   workspaces:
     - name: source
