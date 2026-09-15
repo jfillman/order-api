@@ -18,7 +18,7 @@ registryCredentials:
 rollout:
   image:
     repository: ghcr.io/jfillman/order-api
-    tag: 0.1.4-d3c2570
+    tag: 0.1.4-099cc19
   livenessProbe:
     httpGet:
       path: /
