@@ -44,7 +44,6 @@ deploy:
   promotionOrder:
     - dev
     - test
-    - pre-prod
     - prod
 
 pipelines:
